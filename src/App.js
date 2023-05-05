@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './styles/App.css'
+import { useContext } from 'react'
+import { globalContext } from './Context/Context'
+import MovieCard from './Components/MovieCard'
+import FilterMovie from './Components/FilterMovie';
+import Favorite from './Components/Favorite';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const {setSearch,searchArray} = useContext(globalContext);
+    return (<div className='container-main'>
+      <div className='container-main2'>
+        <form>
+      <input type='text' onChange={(e)=>{setSearch(e.target.value)}}></input>
+    </form>
+    { searchArray === 0 ? <MovieCard /> : <FilterMovie />}
     </div>
-  );
+    <div>
+      <h1>YOUR FAV MOVIES :</h1>
+    <Favorite />
+    </div>
+      </div>)
+    
+
 }
 
 export default App;
